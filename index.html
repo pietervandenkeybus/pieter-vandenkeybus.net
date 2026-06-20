@@ -357,8 +357,14 @@
 
     /* ── ANIM ── */
     @keyframes rise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
-    .reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .7s ease; }
-    .reveal.in { opacity: 1; transform: none; }
+    /* Content is visible by default. Only when JS runs (body.js) do we hide
+       reveal elements first, so crawlers, PDF export and no-JS visitors always
+       see the content. */
+    .js .reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .7s ease; }
+    .js .reveal.in { opacity: 1; transform: none; }
+    @media print {
+      .reveal, .js .reveal { opacity: 1 !important; transform: none !important; }
+    }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 880px) {
@@ -553,6 +559,10 @@
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Mark that JS is active — enables the reveal animation. Without this class
+  // the content stays fully visible (crawlers, PDF, no-JS).
+  document.body.classList.add('js');
 
   const top = document.getElementById('top');
   window.addEventListener('scroll', () => {

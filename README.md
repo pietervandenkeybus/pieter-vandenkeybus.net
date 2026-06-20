@@ -1,44 +1,43 @@
 # pieter-vandenkeybus.net
 
-Niche-dienstsite van Pieter Van den Keybus, volledig rond **UX-strategie**.
-Bewust een ander onderwerp en andere zoekintentie dan de andere domeinen, zodat de site
-naast (niet tegen) de andere kan ranken — voor zoekopdrachten als "UX-strategie" of "UX-strateeg".
-Statische single-page site (HTML/CSS), te deployen via GitHub Pages of Vercel.
+Persoonlijke site van Pieter Van den Keybus — **UX-strategie — niche-dienst (teal ontwerp)**.
+Statische single-page site (HTML/CSS, geen build). Klaar om in een GitHub-repo te zetten.
 
-## Bestanden
-- `index.html` — de volledige pagina (inline CSS, geen build nodig)
+## Inhoud van deze map
+- `index.html` — de volledige pagina (CSS en JS inline)
 - `robots.txt` — verwijst naar de sitemap
-- `sitemap.xml` — één URL (homepage), hreflang nl-BE
+- `sitemap.xml` — homepage-URL, hreflang nl-BE
+- `CNAME` — bevat `pieter-vandenkeybus.net` (zet automatisch het custom domain in GitHub Pages)
+- `.nojekyll` — zegt GitHub Pages dat de bestanden ongewijzigd geserveerd mogen worden
 
-## Deploy
-**GitHub Pages:** repo → Settings → Pages → branch `main`, map `/root`. Custom domain `pieter-vandenkeybus.net` instellen, "Enforce HTTPS" aanzetten.
-**Vercel:** import repo → framework "Other" → custom domain toevoegen.
+## Deployen op GitHub Pages
+1. Maak een nieuwe repo (bv. `net-site`) en upload **de inhoud van deze map** (niet de map zelf) naar de root.
+2. Repo → **Settings → Pages** → Source: *Deploy from a branch* → branch `main`, map `/ (root)`.
+3. Het `CNAME`-bestand zet het domein `pieter-vandenkeybus.net` automatisch klaar.
+4. Zet bij je domeinregistrar de DNS:
+   - `A`-records naar GitHub Pages: `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
+   - of een `CNAME` voor `www` naar `<jouw-gebruikersnaam>.github.io`
+5. Vink in Settings → Pages **"Enforce HTTPS"** aan (kan even duren tot het certificaat klaar is).
 
-## SEO-checklist na deploy
-1. Domein koppelen en HTTPS forceren.
-2. Property aanmaken in Google Search Console voor `pieter-vandenkeybus.net`.
-3. `sitemap.xml` indienen.
-4. `lastmod` updaten bij wijzigingen.
+## Alternatief: Vercel
+Import de repo → framework "Other" → Add Domain `pieter-vandenkeybus.net`. Verder geen config nodig.
 
-## Hoe deze versie onderscheidend is
-- **Eigen onderwerp:** volledig rond UX-strategie (Wat / Traject / Voor wie / FAQ / Contact) i.p.v. een algemene profielpagina. Dit is de belangrijkste factor om naast de andere sites te kunnen verschijnen i.p.v. weggeclusterd te worden.
-- **Extra structured data:** naast Person/WebSite ook **Service**-schema en een **FAQPage**-schema (kan rich results / FAQ-snippets opleveren).
-- **Eigen copy & ontwerp:** teal/deep-palet met Newsreader + Libre Franklin — vierde visuele richting.
-- **Eigen canonical** (`https://pieter-vandenkeybus.net/`) en eigen schema `@id`'s op het `.net`-domein.
-- **`sameAs`** linkt alle vier de domeinen + LinkedIn + Uflow.
+## Na deploy (SEO)
+1. Maak een property aan in **Google Search Console** voor `pieter-vandenkeybus.net`.
+2. Dien `sitemap.xml` in.
+3. Werk `lastmod` in `sitemap.xml` bij na elke inhoudelijke wijziging.
 
-## Belangrijk: maak de koppeling op ALLE sites wederzijds
-Voeg op elk van de andere drie sites de ontbrekende domeinen toe aan hun `sameAs`-lijst,
-zodat alle vier de domeinen naar elkaar verwijzen. Volledige sameAs-lijst:
+## Wat in deze versie is rechtgezet
+- **Zichtbaarheidsfix:** de inhoud is nu standaard zichtbaar. De fade-in-animatie draait
+  alleen nog als JavaScript actief is (`body.js`). Daardoor zien crawlers, PDF-export en
+  bezoekers zonder JS altijd alle secties — eerder konden tussenliggende secties onzichtbaar blijven.
+- **Wederzijdse `sameAs`:** het Person-schema linkt nu alle vier de domeinen + LinkedIn + Uflow,
+  zodat Google ze als één persoon herkent.
+
+## Volledige sameAs-lijst (staat al in index.html)
 - https://pieter-van-den-keybus.be
 - https://pieter-vandenkeybus.be
 - https://pieter-vandenkeybus.eu
 - https://pieter-vandenkeybus.net
 - https://www.linkedin.com/in/pietervandenkeybus
 - https://uflow.be
-
-## Over het doel: pagina één vullen met eigen sites
-Google toont meestal max. 1–2 resultaten per domein en clustert near-duplicate sites van
-dezelfde eigenaar samen. Méér plekken op pagina één krijg je dus NIET door kopieën, maar door
-bronnen met elk een eigen onderwerp/zoekintentie — plus niet-eigen vindplaatsen zoals LinkedIn,
-de Uflow-pagina, gastartikels of interviews. Deze .net-site is daarom bewust op één niche gebouwd.
